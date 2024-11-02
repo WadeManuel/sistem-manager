@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block title %} <title>SIGFE-Crear Cliente</title> {% endblock %}
+</head>
+
+<body>
+
+{% block contenido %}
+<div class="main-panel">
+  <div class="content">
+    <div class="panel-header bg-primary-gradient">
+      <div class="page-inner py-5">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+          <div>
+            <h1 class="text-white pb-2 fw-bold">
+              SIGFE - Sistema Informático para la Gestión de Facturas Electrónicas
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-inner mt-5">
+      <div class="container">
+        <div class="card shadow">
+          <div class="card-header">
+            <h4 class="card-title text-center">Formulario de Insercción de Datos del Cliente</h4>
+          </div>
+          <div class="card-body">
+            {% if form.errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>¡Error!</strong> Por favor corrija los siguientes errores:
+              <ul>
+                {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+                {% endfor %}
+              </ul>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endif %}
+            <div class="row">
+              <div class="col-md-8 offset-md-2">
+                <form method="post">
+                  {% csrf_token %}
+
+                  <!-- Campo: Nombre -->
+                  <div class="form-group">
+                    <label for="id_nombre">Nombre:</label>
+                    <input id="id_nombre" type="text" class="form-control" name="nombre" required
+                     placeholder="Nombre" >
+                  </div>
+
+                  <!-- Campo: Dirección -->
+                  <div class="form-group">
+                    <label for="id_direccion">Direccion:</label>
+                    <input id="id_direccion" type="text" class="form-control" name="direccion" required
+                     placeholder="Direccion" >
+                  </div>
+
+                  <!-- Campo: Telefóno del cliente -->
+                  <div class="form-group">
+                    <label for="id_telefono">Telefóno</label>
+                    <input id="id_telefono" type="number" class="form-control" name="telefono" required
+                     placeholder="Telefóno" >
+                  </div>
+
+                  <!-- Campo: Vendedor -->
+                  <div class="form-group">
+                    <label for="id_vendedor">Vendedor:</label>
+                    <select id="id_vendedor" class="form-control" name="vendedor" required>
+                      <option value="" selected disabled>Seleccione un Vendedor</option>
+                      {% for vendedor in vendedor %}
+                      <option value="{{ vendedor.id }}">{{ vendedor.nombre }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-success">Guardar Cliente</button>
+                    <a href="{% url 'listar_cliente' %}" class="btn btn-danger ml-2">Volver al Listado de Clientes</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% block footer %} {{ block.super }} {% endblock %}
+</div>
+{% endblock %}
+</body>
+
+</html>

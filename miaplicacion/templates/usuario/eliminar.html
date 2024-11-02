@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    {% block title %} <title>Eliminar Cliente</title> {% endblock %}
+</head>
+
+<body>
+    {% block contenido %}
+        <h1>Eliminar Cliente</h1>
+
+        <p>¿Estás seguro de que deseas eliminar al cliente "{{ cliente.nombre }}"?</p>
+
+        <form action="{% url 'eliminar_cliente' cliente.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Confirmar Eliminar</button>
+        </form>
+
+        <a href="{% url 'listar_clientes' %}">Cancelar y Volver al Listado de Clientes</a>
+    {% endblock %}
+</body>
+</html>
+

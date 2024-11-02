@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	{% block title %}<title>Atlantis Lite - Bootstrap 4 Admin Dashboard</title>{% endblock %}
+    {% load static %}
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<link rel="icon" href="{% static 'assets/img/icon.ico' %}" type="image/x-icon"/>
+
+	<!-- Fonts and icons -->
+	<script src="{% static 'assets/js/plugin/webfont/webfont.min.js' %}"></script>
+	<script>
+		WebFont.load({
+			google: {"families":["Lato:300,400,700,900"]},
+			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ["{% static '/assets/css/fonts.min.css' %}"]},
+			active: function() {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
+    <style>
+		:root{
+			--bg-color: #fff;
+			--bg-second-color:#262626;
+			--main-color:#007ff4;
+			--text-color:#55555;
+			--text-color2:#fff;
+		}
+		
+	
+		
+		section{
+			padding: 0rem  8% 2rem;
+			min-height: 100vh;
+		}
+
+			
+			/*Estilos de cambiar contraseña su contenedor padre*/
+			.mx-auto{
+				box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+				background-color:#fff;
+				border-radius: 10px;
+			}
+
+			/*Estilos del Home*/
+                .card {
+			display:flex;
+			justify-content:center;
+			align-item:center;
+			min-height:78vh;
+            background-color:#000;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px 8%;
+            margin-bottom: 20px;
+        }
+		@media (max-width:900px){
+			.card{
+				padding: 20px 5%;
+			}
+			
+		}
+		
+
+        .card-content {
+			width:100%;
+			height:100%;
+            display:flex;
+			justify-content:space-between ;
+			align-items: center;
+			gap:2rem;
+
+        }
+		.moving-text{
+			
+			max-width:470px;
+			
+			
+		}
+		.moving-text h2{
+			font-size: 45px;
+			font-weight:900;
+			color:#555555;
+		}
+		.moving-text p{
+			font-size:16px;
+			margin:0 0 20px;
+			color:#555555;
+		}
+		.moving-text .text-animate{
+			position: relative;
+			width:328px;
+			
+		}
+        .moving-text .text-animate h3 {
+            font-size: 29px;
+			font-weight:600;
+			letter-spacing: 1px;
+			color:transparent;
+			-webkit-text-stroke:.7px #007bff;
+			background-image:linear-gradient(#007bff,#007bff);
+			background-repeat:no-repeat;
+			-webkit-background-clip:text;
+			background-position:0 0 ;
+			animation:homeBgText 6s linear infinite;
+			animation-delay:2s;
+            
+        }
+		
+		.moving-text .text-animate h3::before{
+			content: '';
+			position:absolute;
+			top:0;
+			left:0;
+			width:0;
+			height:100%;
+			border-right:2px solid  #007bff;
+			animation:homeCursortext 6s linear infinite;
+			animation-delay:2s;
+			
+		}
+
+		#boton{
+			position: relative;
+			font-size: 15px;
+			border: 2px solid #1a2035;
+			color: #fff;
+			border-radius: 5px;
+			padding:14px 50px;
+			text-shadow: 0 0 1px #1a2035;
+			transition: .3s ease;
+			background: transparent;
+			overflow: hidden;
+			z-index: 1;
+		
+			&:hover{
+				color:#1a2035;
+			}
+		}
+		.moving-text #boton::before{
+			position: absolute;
+			content: '';
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: #1a2035;
+			transition: .3s ease;
+			z-index: -1;
+		}
+		.moving-text #boton:hover:before{
+			width: 0%;
+		}
+        .image-container {
+            text-align: center;
+        }
+
+        .card-image {
+            max-width: 500px;
+			min-height:300px;
+			object-fit:cover; 
+            border-radius: 8px;
+        }
+
+		
+		
+        .slogan {
+            margin-top: 20px;
+        }
+
+        .slogan p {
+            font-size: 16px;
+            color: #666666;
+        }
+		.social-redes{
+			margin-top:40px;
+			display: flex;
+			gap: 20px;
+		}
+		.social-redes a i{
+			font-size: 30px;
+			color: #555555;
+			transition: .5s ease;
+		
+			&:hover{
+				transform: translateY(-10px);
+				color: #084798;
+			}
+		}
+
+		 /* Estilos de ejemplo para alinear texto e imagen horizontalmente */
+		 .logo-container {
+            display: flex; /* Utiliza flexbox */
+            align-items: center; /* Alinea verticalmente al centro */
+            text-decoration: none; /* Quita la decoración de texto del enlace */
+        }
+
+        .logo-text {
+            margin-left: 10px; /* Espacio a la izquierda del texto */
+            font-size: 18px; /* Tamaño de fuente del texto */
+            font-weight: bold; /* Texto en negrita */
+            color: #ffffff; /* Color del texto */
+        }
+
+        .logo-img {
+            width: 50px; /* Ancho de la imagen */
+            height: 50px; /* Altura de la imagen */
+            border-radius: 50%; /* Borde redondeado para la imagen (opcional) */
+        }
+
+		
+
+		/* Estilos para los gráficos */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        .chart-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+		
+		
+
+		@media (max-width:1300px){
+			.card{
+				padding:20px 4%;
+			}
+			.moving-text h2{
+				font-size:35px;
+			}
+			.card-image {
+				width: 100%;
+				min-height:250px;
+				object-fit:cover; 
+				border-radius: 8px;
+			}
+		}
+
+		@media (max-width:1200px){
+			.moving-text{
+				max-width:350px;	
+			}
+		}
+
+		@media (max-width:800px){
+			.card{
+				min-height:90vh;
+				padding-top:7rem;
+				padding-bottom:7rem;
+			}
+			.card-content {
+				flex-direction: column-reverse;
+			}
+			.moving-text{
+				min-width:100%;
+				padding-right:1px;
+				
+			}
+			.card-image {
+				min-width: 80vw;
+				min-height:250px;
+				object-fit:cover; 
+				border-radius: 8px;
+			}
+	
+			.moving-text h2 {
+				font-size:35px;
+			}
+			.moving-text .text-animate{
+				width:293px;
+			}
+			.moving-text .text-animate h3{
+				font-size:26px;
+				letter-spacing:none;
+			}
+
+			/*Animación */
+		@keyframes homeBgText{
+			0%,
+			10%,
+			100%{
+				background-position:-325px 0;
+			}
+			65%,
+			85%
+			{
+				background-position:0 0;
+			}
+			}
+		}
+
+		/*----About----*/
+		.about{
+			position:relative;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 80px;
+			background: var(--text-color);
+			padding-bottom:70px;
+		}
+		.about .encabezado {
+			color:#55555;
+			text-align: left;
+			font-size: 45px;
+			font-weight: 900;
+			
+		}
+		.about .encabezado span{
+			color:var(--main-color)
+		}
+		.about .contenedor-info{
+			width: 50%;
+		}
+		.about .contenedor-info h3{
+			font-size: 25px;
+			font-weight: 900;
+			color:#007ff4;
+		}
+		
+		.about .contenedor-info p{
+			font-size: 16px;
+			color:#555555;
+			font-weight: 500;
+			margin-boton:1rem;
+		}
+		.about .contenedor-info .content-bottom{
+			width:100%;
+			margin-top:30px;
+		}
+		
+		.about .contenedor-info .boton-about{
+			text-decoration:none;
+			position: relative;
+			font-size: 15px;
+			border: 2px solid #1a2035;
+			color: #fff;
+			border-radius: 5px;
+			padding:14px 50px;
+			text-shadow: 0 0 1px #1a2035;
+			transition: .3s ease;
+			background: transparent;
+			overflow: hidden;
+			z-index: 1;
+		
+			&:hover{
+				color:#1a2035;
+			}
+		}
+		
+		
+		.about .contenedor-info .boton-about::before{
+			position: absolute;
+			content: '';
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: #1a2035;
+			transition: .3s ease;
+			z-index: -1;
+		}
+		.about .contenedor-info .boton-about:hover:before{
+			width: 0%;
+		}
+		.about .contenedor-img{
+			display: flex;
+			flex-direction:column;
+			justify-content: center;
+			align-items: center;
+			width: 50%;
+
+		}
+			#imagen-about{
+			width:100%;
+			min-header:400px;
+			border-radius:2rem;
+			
+			
+		}
+		@media (max-width:1300px) {
+			.about .encabezado {
+				color:#55555;
+				text-align: left;
+				font-size: 25px;
+				font-weight: 900;
+				
+			}
+		}
+		@media (max-width:800px) {
+			
+			.about{
+				flex-direction: column;
+				gap:2rem;
+				justify-content: center;
+				align-item:center;
+			}
+			.about .encabezado{
+				font-size: 25px;
+			}
+			.about .contenedor-info{
+				width: 100%;
+			}
+			
+			.about .contenedor-img{
+				width: 100%;
+			}
+			.imagen-about{
+				width:100%;
+				min-header:400px;
+				border-radius:2rem;
+				padding:1px ;
+				
+			}
+
+			
+			
+		}
+
+		.boton_arriba{
+			position: fixed;
+			bottom: 50px;
+			right: -100px;
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			width: 50px;
+			height: 50px;
+			background: var(--main-color);
+			border-radius: 50%;
+			transition: 1s linear;
+			z-index: 80;
+			 
+		}
+		
+		.boton_arriba i{
+		   font-size: 25px;
+			color: #fff;
+		}
+
+		.contact form{
+			max-width: 700px;
+			margin: 10px auto;
+			text-align: center;
+			margin-bottom: 30px;
+			}
+
+			.encabezados {
+				text-align:center;
+				margin-bottom:30px;
+			}
+			.encabezados h2{
+				font-size:35px;
+				font-weight:700;
+			}
+
+			.contact form .input-box{
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			}
+			.contact form .input-box input ,
+			.contact form textarea {
+			width: 100%;
+			border: 0.1px solid #0074ff;
+			padding: 15px;
+			border-radius: 8px;
+			margin: 8px auto;
+			color: #555555;
+			background: transparent;
+			font-size: 16px;
+			
+			}
+			.contact form textarea:focus{
+				outline: none;
+			}
+			.contact form .input-box input {
+				width: 49%;
+				transition: .3s ease;
+			}
+			.contact form .input-box input:focus{
+				box-shadow: 0 0 4px #1572e8;
+				outline: none;
+				
+			}
+			
+			.contact form .input-box input::placeholder{
+				color: var(--text-color);
+				font-size: 16px;
+			}
+			.contact form textarea {
+				resize: none;
+				transition: .3s ease;
+			} 
+			.contact form textarea::placeholder{
+				color: var(--text-color);
+			}
+			.contact form textarea:focus{
+				box-shadow: 0 0 4px #07f;
+				
+			}
+			.contact form .btn{
+				margin-top: 20px;
+				cursor: pointer;
+				background: var(--main-color);
+				border: 2px solid var(--bg-color);
+				box-shadow: 0 0 2px var(--text-color);
+				color: #fff;
+				padding: 12px 32px;
+				border-radius: 20px;
+				transition: .1s ease;
+		
+				&:hover{
+				   outline: 2px solid var(--main-color);
+				}
+			}
+		
+		   
+			
+			
+			
+			@media (max-width:540px){
+				.contact{
+					padding: 10px 4%;
+				}
+				.contact form .input-box input{
+					width: 100%;
+				}
+				.contact{
+					min-height: 70vh;
+				}
+			}
+
+
+
+
+
+
+
+
+@media (max- width::1100px){
+	html{
+		font-size:55%;
+	}
+}
+
+@media (max- width:800px){
+	section{
+		padding:9rem 4% 2rem; 
+	}
+}
+
+/*Estilos para mensajes */
+#alert-success{
+	background:#fff;
+}
+.lista-mensajes{
+	white:100%;
+	list-style: none;
+  display: flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0px 0px;
+  margin:0px 0px 1px;
+  
+
+}
+.lista-mensajes li{
+	color:#55555;
+}
+
+
+/*Animación */
+@keyframes homeBgText{
+	0%,
+	10%,
+	100%{
+		background-position:-330px 0;
+	}
+	65%,
+	85%
+	{
+		background-position:0 0;
+	}
+}
+@keyframes homeCursortext{
+	0%,
+	10%,
+	100%{
+		width:0;
+	}
+	65%,
+	78%,
+	85%
+	{
+		width:100%;
+		opacity:1;
+	}
+	75%,
+	81%
+	{
+		opacity:0;
+	}
+}
+
+
+
+
+		
+
+    </style>
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/atlantis.min.css' %}">
+
+	<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'boxicons/css/boxicons.css' %}">
+
+	
+	
+
+	<!-- CSS Just for demo purpose, don't include it in your project -->
+	<link rel="stylesheet" href="{% static 'assets/css/demo.css' %}">
+</head>
+<body>
+	<div class="wrapper">
+		<div class="main-header">
+			<!-- Logo Header -->
+			<div class="logo-header" data-background-color="blue">
+				<a href="{% url 'base' %}" class="logo-container logo d-flex align-items-center">
+					<img src="{% static 'assets/img/software-para-restaurantes-1.png' %}" alt="Logo" class="logo-img">
+					<span class="logo-text">SIGFE</span>
+				</a>
+				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon">
+						<i class="icon-menu"></i>
+					</span>
+				</button>
+				<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
+				<div class="nav-toggle">
+					<button class="btn btn-toggle toggle-sidebar">
+						<i class="icon-menu"></i>
+					</button>
+				</div>
+			</div>
+			<!-- End Logo Header -->
+
+			<!-- Navbar Header -->
+			<nav class="navbar navbar-header navbar-expand-lg" data-background-color="blue2">
+				{% if user.is_authenticated %}
+				<div class="container-fluid">
+					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+						<!-- User Profile Dropdown -->
+						<li class="nav-item dropdown hidden-caret">
+							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
+								<div class="d-flex align-items-center">
+									<div class="avatar-sm">
+										<img src="{% static 'assets/img/11817449.png' %}" alt="User Avatar" class="avatar-img rounded-circle">
+									</div>
+									<span class="ml-2 text-white"><strong>Bienvenido, {{ user.first_name }}</strong></span>
+								</div>
+							</a>
+							<ul class="dropdown-menu dropdown-user animated fadeIn">
+								<div class="dropdown-user-scroll scrollbar-outer">
+									<li>
+										<a class="dropdown-item" href="{% url 'cambiar_contraseña' %}">
+											<i class="fas fa-shield-alt"></i>&nbsp;&nbsp;Modificar Contraseña
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="{% url 'logout' %}">
+											<i class="fas fa-lock"></i>&nbsp;&nbsp;Cerrar Sesión
+										</a>
+									</li>
+								</div>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				{% endif %}
+			</nav>
+			<!-- End Navbar -->
+		</div>
+
+		<!-- Sidebar -->
+		<div class="sidebar sidebar-style-2">			
+			<div class="sidebar-wrapper scrollbar scrollbar-inner">
+				<div class="sidebar-content">
+					{% if user.is_authenticated %}
+					<div class="user">
+						<div class="avatar-sm float-left mr-2">
+							<img src="{% static 'assets/img/11817449.png' %}" alt="..." class="avatar-img rounded-circle">
+						</div>
+						<div class="info">
+							<a aria-expanded="true">
+								<span>
+									{{ user.first_name}} {{ user.last_name}}
+									<span class="user-level">{{ user.rol.nombre }}</span>
+								</span>
+							</a>
+						</div>
+					</div>
+					<ul class="nav nav-primary">
+						{% if user.rol.nombre == 'Administrador' %}
+
+						<li class="nav-item">
+							<a href="{% url 'base' %}">
+								<i class="fas fa-home"></i>
+								<p>Home</p>
+							</a>
+						</li>
+
+						<li class="nav-item">
+							<a href="{% url 'listar_vendedor' %}">
+								<i class="fas fa-users"></i>
+								<p>Vendedores</p>
+							</a>
+						</li>
+
+						<li class="nav-item">
+							<a href="{% url 'listar_cliente' %}">
+								<i class="fas fa-users"></i>
+								<p>Clientes</p>
+							</a>
+						</li>
+
+						<li class="nav-item">
+							<a href="{% url 'listar_deportivo' %}">
+								<i class="fas fa-car"></i>
+								<p>Deportivos</p>
+							</a>
+						</li>
+
+						<li class="nav-item">
+							<a href="{% url 'listar_compra' %}">
+								<i class="fas fa-clipboard-list"></i>
+								<p>Ventas</p>
+							</a>
+						</li>
+
+						<li class="nav-item">
+							<a href="{% url 'listar_usuario' %}">
+								<i class="fas fa-star"></i>
+								<p>Usuarios</p>
+							</a>
+						</li>
+
+						<li class="nav-item">
+							<a href="{% url 'listar_rol' %}">
+								<i class="fas fa-user-shield"></i>
+								<p>Roles</p>
+							</a>
+						</li>
+						{% else %}
+						<li class="nav-item">
+							<a href="{% url 'base' %}">
+								<i class="fas fa-home"></i>
+								<p>Home</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{% url 'listar_deportivo' %}">
+								<i class="fas fa-shopping-bag"></i>
+								<p>Deportivos</p>
+							</a>
+						</li>
+						{% endif %}
+					</ul>
+					{% else %}
+					    <ul class="nav nav-primary">
+						<li class="nav-item active submenu">
+							<a href="{% url 'login' %}">
+								<i class="fas fa-sign-in-alt"></i>
+								<p>Iniciar Sesión</p>
+							</a>
+						</li>
+					    </ul>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<!-- End Sidebar -->
+		{% block contenido %}
+		<div class="main-panel">
+			<div class="content">
+				<div class="panel-header bg-primary-gradient">
+					<div class="page-inner py-5">
+						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+							<div>
+								<h1 class="text-white pb-2 fw-bold">Audi - Sistema Informático para la Gestión de Ventas  de Automoviles</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="page-inner mt--5">
+					<div class="card">
+                        <div class="card-content">
+                            <div class="moving-text">
+								<h2>Compañia Audi</h2>
+		
+								<div class="text-animate">
+									<h3>Bienvenido compañia</h3>
+								</div>
+			
+								<p>
+									Este sistema se hizo pensando en ti convinando la más 
+									avanzada tecnología para poder avanzar al proximo nivel
+									poder hacer crecer tu negocio. 
+								</p>
+								<div>
+									<a href="#" id="boton">Saber mas</a>
+								</div>
+								<div class="social-redes">
+									<a href="#"><i class='bx bxl-whatsapp'></i></a>
+									<a href="https://twitter.com/wadeManuel"><i class='bx bxl-twitter'></i></a>
+									<a href="https://github.com/wadeManuel"><i class='bx bxl-github'></i></a>
+									<a href="https://linkedin.com/wadeManuel"><i class='bx bxl-linkedin-square' ></i></a>
+								</div> 
+								
+                            </div>
+                            <div class="image-container">
+                                <img src="{% static 'assets/img/company.jpg' %}" alt="Imagen" class="card-image" id="card-image">
+                            </div>
+                        </div>
+                    </div>
+                    
+				</div>
+			</div>
+
+
+			<!--Section Acerca de Nosotros -->
+			<section class="about" id="about">
+        
+				<div class="contenedor-img">
+					{%load static%}
+					<img src="{% static 'assets/img/2.jpg' %}" alt="Imagen" id="imagen-about">
+				</div>
+		
+				<div class="contenedor-info">
+					<h2 class="encabezado">Acerca de <span>Nosotros</span> </h2>
+					<h3>Compañia Audi</h3>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit 
+						illo perspiciatis vero fugiat, alias
+						 error enim quos quidem obcaecati distinctio repudiandae id harum,
+						  beatae dolorum quam facilis odio sed totam.
+					</p>
+					<div class="content-bottom">
+						<a href="" class="boton-about">Saber mas</a>
+					<div>
+				
+				</div>
+				
+		</section>
+		
+		
+		<!---section-desing-contact-->
+		<section class="contact" id="contact">
+		    <div class="encabezados">
+		        <h2 class="encabezado">Contactanos</h2>
+		    </div>
+		    <div class="container-contact">
+		        <div class="fondo">
+				
+		        </div>
+		        <div class="container-form">
+		            <form action="">
+		                <div class="input-box">
+		                    <input type="text" placeholder="Full Nmae" minlength="10" maxlength="40" required>
+		                    <input type="text" placeholder="Email Addrees" required>
+		                </div>
+		                <div class="input-box">
+		                    <input type="number" placeholder="Mobile Number" required>
+		                    <input type="email" placeholder="Email Subjet" required>
+		                </div>
+		                <textarea name="" id="" cols="30" rows="10" placeholder="Your Message" required></textarea>
+		                <input type="submit" value="Send Message"   class="btn">
+		            </form>
+		        </div>
+		    </div>
+		</section>
+	
+			<!---boton de ir hacia arriba-->
+			<a href="" id="home" class="boton_arriba" ><i class='bx bx-up-arrow-alt'></i></a>  
+
+			{% block footer %}
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="copyright ml-auto">
+						2024, made with <i class="fa fa-heart heart text-danger"></i> by <a href="https://github.com.wademanuel">WadeManuel</a>
+					</div>				
+				</div>
+			</footer>
+			{% endblock %}
+
+		</div>
+		{% endblock %}
+	</div>
+	{% block javascript %}
+
+	
+
+	<!--   Core JS Files   -->
+	<script src="{% static 'assets/js/core/jquery.3.2.1.min.js' %}"></script>
+	<script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+	<script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+
+	<!-- jQuery UI -->
+	<script src="{% static 'assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js' %}"></script>
+	<script src="{% static 'assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js' %}"></script>
+
+	<!-- jQuery Scrollbar -->
+	<script src="{% static 'assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
+
+	<!-- Datatables -->
+	<script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
+
+	<!-- Chart JS -->
+	<script src="{% static 'assets/js/plugin/chart.js/chart.min.js' %}"></script>
+
+	<!-- jQuery Sparkline -->
+	<script src="{% static 'assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js' %}"></script>
+
+	<!-- Chart Circle -->
+	<script src="{% static 'assets/js/plugin/chart-circle/circles.min.js' %}"></script>
+
+	<!-- Bootstrap Notify -->
+	<script src="{% static 'assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
+
+	<!-- jQuery Vector Maps -->
+	<script src="{% static 'assets/js/plugin/jqvmap/jquery.vmap.min.js' %}"></script>
+	<script src="{% static 'assets/js/plugin/jqvmap/maps/jquery.vmap.world.js' %}"></script>
+
+	<!-- Atlantis JS -->
+	<script src="{% static 'assets/js/atlantis.min.js' %}"></script>
+	<script>
+		$(document).ready(function() {
+			$('#basic-datatables').DataTable({
+			});
+
+			$('#multi-filter-select').DataTable( {
+				"pageLength": 5,
+				initComplete: function () {
+					this.api().columns().every( function () {
+						var column = this;
+						var select = $('<select class="form-control"><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+
+							column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+						} );
+
+						column.data().unique().sort().each( function ( d, j ) {
+							select.append( '<option value="'+d+'">'+d+'</option>' )
+						} );
+					} );
+				}
+			});
+
+			// Add Row
+			$('#add-row').DataTable({
+				"pageLength": 5,
+			});
+
+			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+
+			$('#addRowButton').click(function() {
+				$('#add-row').dataTable().fnAddData([
+					$("#addName").val(),
+					$("#addPosition").val(),
+					$("#addOffice").val(),
+					action
+					]);
+				$('#addRowModal').modal('hide');
+
+			});
+		});
+	</script>
+<script>
+	function validarPrecio(event) {
+		const charCode = (event.which) ? event.which : event.keyCode;
+		const inputValue = event.target.value;
+		
+		// Permitir solo números y un punto decimal
+		if (charCode !== 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+			return false;
+		}
+		
+		// Permitir solo un punto decimal
+		if (inputValue.indexOf('.') !== -1 && charCode === 46) {
+			return false;
+		}
+		
+		return true;
+	}
+	</script>
+
+
+	 <!--- scroll riveal-->
+	 <script src="./static/js/scrollreveal.js"></script>
+	 <!--Codigo Script-->
+	<script >
+		/*Boton de ir arriba*/ 
+function irArriba(pxpantalla){
+    window.addEventListener('scroll',()=>{
+        var scroll=document.documentElement.scrollTop;
+
+        let bottonirArriba=document.querySelector('.boton_arriba');
+        if(scroll > 500){
+            bottonirArriba.style.right = 20 +"px";
+        }else{
+            bottonirArriba.style.right = -100 +"px";
+        }
+
+        bottonirArriba.addEventListener('click',()=>{
+            window.scrollTo({
+                top:0,
+                behavior:'smooth'
+            });
+        });
+    });
+
+}
+irArriba(500);
+
+	</script>
+
+	 <script>
+		 /*-----Scroll reveal-------------*/ 
+			 ScrollReveal({
+				reset: true,
+				distance:'80px',
+				duration:2000,
+				delay:200
+			});
+
+			ScrollReveal().reveal('.moving-text,.heading,.encabezado,.container-img2 img ', { origin:'top' });
+			ScrollReveal().reveal('.image-container img,.card-box,.container_servicios,.contact form', { origin:'bottom' });
+			ScrollReveal().reveal('.moving-text h2,.moving-text p,.contenedor-img img', { origin:'left' });
+			ScrollReveal().reveal('.moving-text h3,.contenedor-info', { origin:'right' });
+			</script>
+	{% endblock %}
+</body>
+</html>

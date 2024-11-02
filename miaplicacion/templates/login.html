@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Iniciar Sesión - SIGFE</title>
+
+    <!-- Fonts and icons -->
+    <script src="{% static 'assets/js/plugin/webfont/webfont.min.js' %}"></script>
+    <script>
+        WebFont.load({
+            google: {"families":["Lato:300,400,700,900"]},
+            custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ["{% static '/assets/css/fonts.min.css' %}"]},
+            active: function() {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/atlantis.min.css' %}">
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="{% static 'assets/css/demo.css' %}">
+
+    <style>
+        *{
+            text-decoration: none;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #007bff, #56ccf2);
+            background-size: cover;
+            background-repeat: no-repeat;
+            width:100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center; /* Centra horizontalmente */
+            align-items: center; /* Centra verticalmente */
+            overflow: hidden;
+            position: relative;
+            font-family: 'Lato', sans-serif;
+        }
+        .wrapper{
+            display:flex;
+            justify-content:center;
+            flex-direction: column;
+            align-items:center;
+        }
+
+        .login-form {
+            background-color:#09f ;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            margin-top: 50px;
+            width: 400px;
+           
+            max-width: 90%;
+            text-align: center;
+            transition: transform 0.5s ease; /* Animación de transformación */
+            transform: translateY(-50px); /* Inicialmente trasladado hacia arriba */
+            opacity: 0; /* Inicialmente oculto */
+        }
+
+        .login-form.show {
+            transform: translateY(0); /* Mostrar en el centro */
+            opacity: 1; /* Hacer visible */
+        }
+
+        .login-form h2 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .login-form input[type="text"], 
+        .login-form input[type="password"] {
+            width: calc(100% - 40px);
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #e3e3e3;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background:transparent;
+            color:#fff;
+        }
+
+        .login-form input[type="text"]:focus, 
+        .login-form input[type="password"]:focus {
+            outline: none;
+            border-color: #007ced;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+        }
+        
+       
+
+        .login-form button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007ff4;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-form button:hover {
+            background-color:#007ced;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="login-form" clase="show">
+            <img src="{% static 'assets/img/software-para-restaurantes-1.png' %}" alt="Logo" style="width: 80px; margin-bottom: 20px;">
+            <h2>Iniciar Sesión</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JS Files -->
+    <script src="{% static 'assets/js/core/jquery.3.2.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+
+    <!-- Script para mostrar la tarjeta de inicio de sesión de manera animada -->
+    <script>
+        $(document).ready(function() {
+            $('.login-form').addClass('show'); // Agregar la clase show para mostrar animadamente la tarjeta
+        });
+    </script>
+</body>
+</html>

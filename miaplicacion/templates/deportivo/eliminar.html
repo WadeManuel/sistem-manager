@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    {% block title %} <title>Eliminar Producto</title> {% endblock %}
+</head>
+<body>
+    {% block contenido %}
+        <h1>Eliminar Producto</h1>
+
+        <p>¿Estás seguro de que deseas eliminar producto "{{ producto.nombre }}"?</p>
+
+        <form action="{% url 'eliminar_producto' producto.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Confirmar Eliminar</button>
+        </form>
+
+        <a href="{% url 'listar_productos' %}">Cancelar y Volver al Listado de Productos</a>
+    {% endblock %}
+</body>
+</html>
+

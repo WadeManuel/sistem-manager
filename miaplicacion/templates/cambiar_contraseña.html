@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}<title>Cambiar Contraseña</title>{% endblock %}
+
+{% block contenido %}
+<div class="main-panel">
+    <div class="content">
+        <div class="panel-header bg-primary-gradient">
+            <div class="page-inner py-5">
+                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+                    <div>
+                        <h1 class="text-white pb-2 fw-bold">
+                            SIGFE - Sistema Informático para la Gestión de Ventas de Automoviles
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-inner mt--5">
+            <div class="col-md-12 text-center">
+                {% if form.errors %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>¡Error!</strong> Por favor corrija los siguientes errores:
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                        {% endfor %}
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+                <div class="mx-auto" style="max-width: 500px;">
+                    <div class="card-header text-center">
+                        <!-- Imagen de Cabecera -->
+                        <img src="{% static 'assets/img/9710382.png' %}" alt="Logo" class="img-fluid mb-4"
+                            style="max-width: 50px;">
+                        <h4 class="card-title">Cambiar Contraseña</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{% url 'cambiar_contraseña' %}">
+                            {% csrf_token %}
+
+                            <!-- Campo: Contraseña Actual -->
+                            <div class="form-group">
+                                <label for="id_old_password">Contraseña actual:</label>
+                                <input id="id_old_password" type="password" name="old_password" class="form-control"
+                                    required>
+                            </div>
+
+                            <!-- Campo: Nueva Contraseña -->
+                            <div class="form-group">
+                                <label for="id_new_password1">Nueva contraseña:</label>
+                                <input id="id_new_password1" type="password" name="new_password1" class="form-control"
+                                    required>
+                            </div>
+
+                            <!-- Campo: Confirmar Nueva Contraseña -->
+                            <div class="form-group">
+                                <label for="id_new_password2">Confirmar nueva contraseña:</label>
+                                <input id="id_new_password2" type="password" name="new_password2" class="form-control"
+                                    required>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success">Cambiar Contraseña</button>
+                                <a href="{% url 'base' %}" class="btn btn-secondary ml-2">Cancelar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block footer %} {{ block.super }} {% endblock %}
+</div>
+{% endblock %}
+
+{% block javascript %} {{ block.super }} {% endblock %}

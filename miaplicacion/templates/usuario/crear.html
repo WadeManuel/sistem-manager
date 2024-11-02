@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block title %} <title>SIGFE-Crear Cliente</title> {% endblock %}
+</head>
+
+<body>
+
+{% block contenido %}
+<div class="main-panel">
+  <div class="content">
+    <div class="panel-header bg-primary-gradient">
+      <div class="page-inner py-5">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+          <div>
+            <h1 class="text-white pb-2 fw-bold">
+              SIGFE - Sistema Informático para la Gestión de Facturas Electrónicas
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-inner mt-5">
+      <div class="container">
+        <div class="card shadow">
+          <div class="card-header">
+            <h4 class="card-title text-center">Formulario de Insercción de Datos del Usuario</h4>
+          </div>
+          <div class="card-body">
+            {% if form.errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>¡Error!</strong> Por favor corrija los siguientes errores:
+              <ul>
+                {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+                {% endfor %}
+              </ul>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endif %}
+            <div class="row">
+              <div class="col-md-8 offset-md-2">
+                <form method="post">
+                  {% csrf_token %}
+
+                  <!-- Campo: Nombre de usuario -->
+                  <div class="form-group">
+                    <label for="id_username">Nombre de usuario:</label>
+                    <div class="input-group">
+                      <input id="id_username" type="text" class="form-control" name="username" maxlength="150"
+                        pattern="[A-Za-z0-9.@_+-]+" title="Únicamente letras, dígitos y @/./+/-/_ permitidos." required
+                        autofocus placeholder="Nombre de Usuario">
+                      <div class="input-group-append">
+                        <button type="button" class="btn btn-info" data-toggle="modal"
+                          data-target="#modalUsernameHelp">?</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Modal: Ayuda para Nombre de usuario -->
+                  <div class="modal fade" id="modalUsernameHelp" tabindex="-1" role="dialog"
+                    aria-labelledby="modalUsernameHelpLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="modalUsernameHelpLabel">Ayuda: Nombre de usuario</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Introduzca un nombre de usuario único.</p>
+                          <p>Debe contener solo letras, números, @, ., +, -, _ y no puede contener espacios.</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Campo: Nombre -->
+                  <div class="form-group">
+                    <label for="id_first_name">Nombre:</label>
+                    <input id="id_first_name" type="text" class="form-control" name="first_name" required 
+                    placeholder="Nombre">
+                  </div>
+
+                  <!-- Campo: Apellido -->
+                  <div class="form-group">
+                    <label for="id_last_name">Apellido:</label>
+                    <input id="id_last_name" type="text" class="form-control" name="last_name" required
+                    placeholder="Apellido">
+                  </div>
+
+                  <!-- Campo: Dirección de correo electrónico -->
+                  <div class="form-group">
+                    <label for="id_email">Dirección de correo electrónico:</label>
+                    <input id="id_email" type="email" class="form-control" name="email" required
+                    placeholder="Dirección de correo electrónico:">
+                  </div>
+
+                  <!-- Campo: Rol -->
+                  <div class="form-group">
+                    <label for="id_rol">Rol:</label>
+                    <select id="id_rol" class="form-control" name="rol" required>
+                      <option value="" selected disabled>Seleccione un rol</option>
+                      {% for rol in roles %}
+                      <option value="{{ rol.id }}">{{ rol.nombre }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+
+                  <!-- Campo: Contraseña -->
+                  <div class="form-group">
+                    <label for="id_password1">Contraseña:</label>
+                    <div class="input-group">
+                      <input id="id_password1" type="password" class="form-control" name="password1" required>
+                      <div class="input-group-append">
+                        <button type="button" class="btn btn-info" data-toggle="modal"
+                          data-target="#modalPassword1Help">?</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Modal: Ayuda para Contraseña -->
+                  <div class="modal fade" id="modalPassword1Help" tabindex="-1" role="dialog"
+                    aria-labelledby="modalPassword1HelpLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="modalPassword1HelpLabel">Ayuda: Contraseña</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Su contraseña debe cumplir con los siguientes criterios:</p>
+                          <ul>
+                            <li>Debe tener al menos 8 caracteres.</li>
+                            <li>No debe asemejarse tanto a su otra información personal.</li>
+                            <li>No debe ser una contraseña comúnmente utilizada.</li>
+                            <li>No puede ser completamente numérica.</li>
+                          </ul>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Campo: Confirmación de Contraseña -->
+                  <div class="form-group">
+                    <label for="id_password2"> Confirmar Contraseña:</label>
+                    <input id="id_password2" type="password" class="form-control" name="password2" required
+                    placeholder="Confirmar Contraseña">
+                  </div>
+
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-success">Guardar Cliente</button>
+                    <a href="{% url 'listar_usuario' %}" class="btn btn-danger ml-2">Volver al Listado de Clientes</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% block footer %} {{ block.super }} {% endblock %}
+</div>
+{% endblock %}
+</body>
+
+</html>

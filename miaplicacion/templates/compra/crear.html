@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block title %} <title>SIGFE-Crear Registro de Venta</title> {% endblock %}
+</head>
+
+<body>
+
+{% block contenido %}
+<div class="main-panel">
+  <div class="content">
+    <div class="panel-header bg-primary-gradient">
+      <div class="page-inner py-5">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+          <div>
+            <h1 class="text-white pb-2 fw-bold">
+              SIGFE - Sistema Informático para la Gestión de Ventas de Automoviles
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-inner mt-5">
+      <div class="container">
+        <div class="card shadow">
+          <div class="card-header">
+            <h4 class="card-title text-center">Formulario de Insercción de Datos de Registro de Venta</h4>
+          </div>
+          <div class="card-body">
+            {% if form.errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>¡Error!</strong> Por favor corrija los siguientes errores:
+              <ul>
+                {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+                {% endfor %}
+              </ul>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endif %}
+            <div class="row">
+              <div class="col-md-8 offset-md-2">
+                <form method="post">
+                  {% csrf_token %}
+                  <!-- Campo: Deportivo -->
+                  <div class="form-group">
+                    <label for="id_deportivo">Auto Comprado:</label>
+                    <select id="id_deportivo" class="form-control" name="deportivo" required>
+                      <option value="" selected disabled>Seleccione el Auto Comprado</option>
+                      {% for deportivo in deportivo %}
+                      <option value="{{ deportivo.id }}">{{ deportivo.marca }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+
+                  <!-- Campo: Cliente quien compró el auto -->
+                  <div class="form-group">
+                    <label for="id_cliente">Cliente:</label>
+                    <select id="id_cliente" class="form-control" name="cliente" required>
+                      <option value="id_cliente" selected disabled>Seleccione el Cliente</option>
+                      {% for cliente in cliente %}
+                      <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+
+                  <!-- Campo: Monto de la Transación -->
+                  <div class="form-group">
+                    <label for="id_monto">Monto de la Transación:</label>
+                    <input id="id_monto" type="text" class="form-control" name="monto" required
+                     placeholder=" Monto de la Transación" >
+                  </div>
+
+                  <!-- Campo: Fecha de la Transación -->
+                  <div class="form-group">
+                    <label for="id_createAt">Fecha de la Transación:</label>
+                    <input id="id_createAt" type="text" class="form-control" name="createAt" required
+                     placeholder=" Fecha de la Transación" >
+                  </div>
+
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-success">Guardar Venta</button>
+                    <a href="{% url 'listar_compra' %}" class="btn btn-danger ml-2">Volver al Listado de Ventas</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% block footer %} {{ block.super }} {% endblock %}
+</div>
+{% endblock %}
+</body>
+
+</html>

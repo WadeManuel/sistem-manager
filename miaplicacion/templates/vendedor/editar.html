@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block title %} <title>SIGFE- Editar Datos del Cliente</title> {% endblock %}
+</head>
+
+<body>
+
+{% block contenido %}
+<div class="main-panel">
+    <div class="content">
+        <div class="panel-header bg-primary-gradient">
+            <div class="page-inner py-5">
+                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+                    <div>
+                        <h1 class="text-white pb-2 fw-bold">
+                            Audi - Sistema Informático para la Gestión de Ventas Automoviles
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-inner mt-5">
+            <div class="container">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h4 class="card-title text-center">Formulario de Edición de Datos Básicos del Vendedor</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if form.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>Error:</strong> Por favor corrija los siguientes errores.
+                                        <ul>
+                                            {% for field, errors in form.errors.items %}
+                                                {% for error in errors %}
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                    <li>{{ error }}</li>                                                    
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-md-8 offset-md-2">
+                                <form method="post">
+                                    {% csrf_token %}
+                                     <!-- Campo: Nombre -->
+                                    <div class="form-group">
+                                        <label for="id_nombre">Nombre:</label>
+                                        <input id="id_nombre" type="text" class="form-control" name="nombre" required
+                                        value="{{ form.nombre.value }}" placeholder="Nombre">
+                                    </div>
+
+                                    <!-- Campo: Apellidos -->
+                                    <div class="form-group">
+                                        <label for="id_apellidos">:</label>
+                                        <input id="id_apellidos" type="text" class="form-control" name="apellidos" required
+                                        value="{{ form.apellidos.value }}" placeholder="Apellidos">
+                                    </div>
+
+                                    <!-- Campo: Anos Trabajo -->
+                                    <div class="form-group">
+                                        <label for="id_telefono">Telefóno</label>
+                                        <input id="id_telefono" type="number" class="form-control" name="anos_trabajo" required
+                                        value="{{ form.anos_trabajo.value }}" placeholder="Años de Trabajo">
+                                    </div>
+
+                                    
+
+                                    <div class="form-group text-center">
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                        <a href="{% url 'listar_vendedor' %}" class="btn btn-warning ml-2">Regresar</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block footer %} {{ block.super }} {% endblock %}
+</div>
+{% endblock %}
+</body>
+
+</html>

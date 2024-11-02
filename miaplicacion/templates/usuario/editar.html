@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block title %} <title>SIGFE- Editar Datos del Usuario</title> {% endblock %}
+</head>
+
+<body>
+
+{% block contenido %}
+<div class="main-panel">
+    <div class="content">
+        <div class="panel-header bg-primary-gradient">
+            <div class="page-inner py-5">
+                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+                    <div>
+                        <h1 class="text-white pb-2 fw-bold">
+                            SIGFE - Sistema Informático para la Gestión de Ventas de Automoviles
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-inner mt-5">
+            <div class="container">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h4 class="card-title text-center">Formulario de Edición de Datos Básicos del Usuario</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if form.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>Error:</strong> Por favor corrija los siguientes errores.
+                                        <ul>
+                                            {% for field, errors in form.errors.items %}
+                                                {% for error in errors %}
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                    <li>{{ error }}</li>                                                    
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-md-8 offset-md-2">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <!-- Campo: Nombre -->
+                                    <div class="form-group">
+                                        <label for="id_first_name">Nombre:</label>
+                                        <input id="id_first_name" type="text" class="form-control" name="first_name"
+                                            required value="{{ form.first_name.value }}">
+                                    </div>
+
+                                    <!-- Campo: Apellido -->
+                                    <div class="form-group">
+                                        <label for="id_last_name">Apellido:</label>
+                                        <input id="id_last_name" type="text" class="form-control" name="last_name"
+                                            required value="{{ form.last_name.value }}">
+                                    </div>
+
+                                    <!-- Campo: Dirección de correo electrónico -->
+                                    <div class="form-group">
+                                        <label for="id_email">Dirección de correo electrónico:</label>
+                                        <input id="id_email" type="email" class="form-control" name="email" required
+                                            value="{{ form.email.value }}">
+                                    </div>
+
+                                    <!-- Campo: Rol -->
+                                    <div class="form-group">
+                                        <label for="id_rol">Rol:</label>
+                                        <select id="id_rol" class="form-control" name="rol" required>
+                                            {% for rol in form.fields.rol.queryset %}
+                                                <option value="{{ rol.id }}" {% if rol.id == form.instance.rol.id %} selected {% endif %}>{{ rol.nombre }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group text-center">
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                        <a href="{% url 'listar_usuario' %}" class="btn btn-warning ml-2">Regresar</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block footer %} {{ block.super }} {% endblock %}
+</div>
+{% endblock %}
+</body>
+
+</html>

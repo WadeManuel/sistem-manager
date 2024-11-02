@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block title %} <title>SIGFE- Editar Datos del Cliente</title> {% endblock %}
+</head>
+
+<body>
+
+{% block contenido %}
+<div class="main-panel">
+    <div class="content">
+        <div class="panel-header bg-primary-gradient">
+            <div class="page-inner py-5">
+                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+                    <div>
+                        <h1 class="text-white pb-2 fw-bold">
+                            Audi - Sistema Informático para la Gestión de Ventas Automoviles
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-inner mt-5">
+            <div class="container">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h4 class="card-title text-center">Formulario de Edición de Datos Básicos de Registro de Venta</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if form.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>Error:</strong> Por favor corrija los siguientes errores.
+                                        <ul>
+                                            {% for field, errors in form.errors.items %}
+                                                {% for error in errors %}
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                    <li>{{ error }}</li>                                                    
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-md-8 offset-md-2">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <!-- Campo: Deportivo -->
+                                    <div class="form-group">
+                                        <label for="deportivo">Auto Comprado:</label>
+                                        <select id="deportivo" class="form-control" name="deportivo" required>
+                                            <option value="" selected disabled>Seleccione el Auto Comprado</option>
+                                            {% for deportivo in compra.fields.deportivo.queryset %}
+                                                <option value="{{ deportivo.id }}" {% if deportivo.id == compra.instance.deportivo.id %} selected {% endif %}>{{ deportivo.modelo }} {{ deportivo.marca }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <!-- Campo: Cliente quien compró el auto -->
+                                    <div class="form-group">
+                                      <label for="id_cliente">Cliente:</label>
+                                      <select id="id_cliente" class="form-control" name="cliente" required>
+                                        <option value="id_cliente" selected disabled>Seleccione el Cliente</option>
+                                        {% for cliente in compra.fields.cliente.queryset %}
+                                                <option value="{{ cliente.id }}" {% if cliente.id == compra.instance.cliente.id %} selected {% endif %}>{{ cliente.nombre }} </option>
+                                            {% endfor %}
+                                      </select>
+                                    </div>
+
+                                    <!-- Campo: Monto de la Transación -->
+                                    <div class="form-group">
+                                        <label for="id_monto">Monto de la Transación:</label>
+                                        <input id="id_monto" type="text" class="form-control" name="monto" required
+                                        placeholder=" Monto de la Transación" value="{{compra.monto.value}}">
+                                    </div>
+
+                                    <!-- Campo: Fecha de la Transación -->
+                                    <div class="form-group">
+                                        <label for="id_creatAt">Fecha de la Transación:</label>
+                                        <input id="id_creatAt" type="text" class="form-control" name="createAt" required
+                                        placeholder=" Fecha de la Transación" value="{{compra.createAt.value}}">
+                                    </div>
+
+                                    <div class="text-center">
+                                      <button type="submit" class="btn btn-success">Guardar Venta</button>
+                                      <a href="{% url 'listar_compra' %}" class="btn btn-danger ml-2">Volver al Listado de Ventas</a>
+                                    </div>                 
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block footer %} {{ block.super }} {% endblock %}
+</div>
+{% endblock %}
+</body>
+
+</html>

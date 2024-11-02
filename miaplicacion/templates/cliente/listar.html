@@ -1,0 +1,149 @@
+1{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block title %} <title>SIGFE-Listado de Clientes</title> {% endblock %}
+</head>
+
+<body>
+    {% block contenido %}
+    <div class="main-panel">
+        <div class="content">
+            <div class="panel-header bg-primary-gradient">
+                <div class="page-inner py-5">
+                    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+                        <div>
+                            <h1 class="text-white pb-2 fw-bold">SIGFE - Sistema Informático para la Gestión de Facturas
+                                Electrónicas</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-inner mt--5">
+                <div class="col-md-12">
+                    {% if messages %}
+                    <div class="alert alert-success" id="alert-success">
+                        <ul class="lista-mensajes">
+                            {% for message in messages %}
+                                <li  {% if message.tags %}  {% endif %}>{{message}}</li>
+                            {%endfor%}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </ul>   
+                    </div>
+                    {% endif %}
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title">Listado de Clientes</h4>
+                                {% if user.rol.nombre == 'Administrador' %}
+                                <form action="{% url 'crear_cliente' %}" method="get" class="btn ml-auto">
+                                    <button class="btn btn-primary btn-round ml-auto">
+                                        <i class="fa fa-plus"></i>&nbsp;Insertar Cliente
+                                    </button>
+                                </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="add-row" class="display table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Dirección</th>
+                                            <th>Telefono</th>
+                                            <th>Vendedor</th>
+                                            {% if user.rol.nombre == 'Administrador' %}
+                                            <th style="width: 10%">Acción</th>
+                                            {% endif %}
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Dirección</th>
+                                            <th>Telefono</th>
+                                            <th>Vendedor</th>
+                                            
+                                            {% if user.rol.nombre == 'Administrador' %}
+                                            <th>Acción</th>
+                                            {% endif%}
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {% for cliente in cliente %}
+                                        <tr>
+                                            <td>{{ cliente.nombre }}</td>
+                                            <td>{{ cliente.direccion }}</td>
+                                            <td>{{ cliente.telefono }}</td>
+                                            <td>{{ cliente.vendedor.nombre }} {{ cliente.vendedor.apellidos}}</td>
+                                            {% if user.rol.nombre == 'Administrador' %}
+                                            <td>
+                                                <div class="form-button-action">
+                                                    <a type="button" href="{% url 'editar_cliente' cliente.id %}"
+                                                        class="btn btn-link btn-primary btn-lg">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <button type="button" data-toggle="modal" title=""
+                                                        class="btn btn-link btn-danger"
+                                                        data-target="#eliminarModal{{ cliente.id }}">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                    <!-- Modal de Confirmación de Eliminación -->
+                                                    <div class="modal fade" id="eliminarModal{{ cliente.id }}"
+                                                        tabindex="-1" role="dialog"
+                                                        aria-labelledby="eliminarModalLabel{{ cliente.id }}"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="eliminarModalLabel{{ cliente.id }}">
+                                                                        Confirmar Eliminación</h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    ¿Estás seguro que deseas eliminar el cliente
+                                                                    <strong>{{ cliente.nombre }} </strong>?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Cancelar</button>
+                                                                    <form
+                                                                        action="{% url 'eliminar_cliente' cliente.id %}"
+                                                                        method="post">
+                                                                        {% csrf_token %}
+                                                                        <input type="submit" class="btn btn-danger"
+                                                                            value="Eliminar">
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            {% endif %}
+                                        </tr>
+                                        {% endfor %}
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% block footer %} {{ block.super }} {% endblock %}
+    </div>
+    {% endblock %}
+    {% block javascript %} {{ block.super }} {% endblock %}
+</body>
+
+</html>

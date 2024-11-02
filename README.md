@@ -4,7 +4,7 @@ Computer system to manage the activities of an automotive company for an Audi co
 # Author
 Esmanue Pileta Alayo
 
-#See example
+# See example
 https://github.com/WadeManuel/sistem-manager.git
 
 

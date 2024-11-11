@@ -11,8 +11,10 @@ https://github.com/WadeManuel/sistem-manager.git
 My phone number is +53 51236256
 
 # Password to log in
-UserName
-wadeManuek
-Password
+# UserName
+wadeManuel
+# Password
 welcome123*/
+
+
 

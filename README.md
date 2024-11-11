@@ -5,7 +5,7 @@
 Esmanue Pileta Alayo
 
 # See example
-https://github.com/WadeManuel/sistem-manager.git
+ https://wademanuel.github.io/sistem-manager/
 
 # Hering
 My phone number is +53 51236256

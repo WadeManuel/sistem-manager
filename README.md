@@ -10,4 +10,9 @@ https://github.com/WadeManuel/sistem-manager.git
 # Hering
 My phone number is +53 51236256
 
+# Password to log in
+UserName
+wadeManuek
+Password
+welcome123*/
 

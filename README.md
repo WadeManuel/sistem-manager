@@ -7,9 +7,12 @@ Esmanue Pileta Alayo
 # See example
  https://wademanuel.github.io/sistem-manager/
 
-# Hering
+# Code 
+
+
 # Contact
 My phone number is +53 51236256
+
 # Email
 epiletalayo@gmail.com
 

@@ -9,10 +9,6 @@ Esmanue Pileta Alayo
 
 # Code 
 https://github.com/WadeManuel/sistem-manager.git
-
-# Contact
-My phone number is +53 51236256
-
 # Email
 epiletalayo@gmail.com
 
